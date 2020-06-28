@@ -8,7 +8,7 @@ const blueprint = new sbp.Blueprint({
   height: '100%'
 });
 
-const gear = new Gear(1, 20, 20);
+const gear = new Gear(1, 24, 20);
 
 const gearModel = makerjs.exporter.toSVGPathData(gear, { origin: [0, 0]});
 

@@ -72,7 +72,8 @@ class Gear {
         inv2CurvePoints = [],
         curvePoints = [],
         curve = [],
-        gearTeeth = { models: {} },
+        // gearTeeth = { models: {} },
+        gearTeeth = [],
         resolution = 0.1;
 
         const phi1 = (Math.PI / 2) - this.alpha * (Math.PI / 180) - (360 / (4 * this.numTeeth) * (Math.PI / 180));
@@ -121,13 +122,14 @@ class Gear {
         for(let i = 0; i <= this.numTeeth; i++) {
             let toothClone = makerjs.cloneObject(curve);
             makerjs.model.rotate(toothClone, angle * i, [0, 0]);
-            gearTeeth.models[i] = toothClone;
+            gearTeeth.push(toothClone);
         }
+    
         for(let i = 0; i <= this.numTeeth; i++){
             let arcClone = makerjs.cloneObject(arc);
             let angle = 360 / this.numTeeth;
             makerjs.model.rotate(arcClone, angle * i, [0, 0]);
-            gearTeeth.models[this.numTeeth+i] = arcClone;
+            gearTeeth.push(arcClone);
         }
 
         return gearTeeth
@@ -138,10 +140,11 @@ class Gear {
     }
 
     createGear() {
-        let model = [];
+        let model;
 
-        model.push(this.createInvoluteCurve());
-
+        // model.push(this.createInvoluteCurve());
+        model = this.createInvoluteCurve();
+        
         return model
     }
 }
